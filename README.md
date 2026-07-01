@@ -1,136 +1,146 @@
 # Hermes Multi Notes Lab
 
-Application locale simple et fonctionnelle pour la gestion de notes.
+Application locale simple et fonctionnelle pour la gestion de notes, créée dans le cadre d'un test de coordination multi-instance Hermes.
 
-## Architecture
+## Description
 
-### Structure des fichiers
+Hermes Multi Notes Lab est une application de prise de notes locale avec interface graphique, développée pour tester la capacité de Hermes à coordonner plusieurs instances via son dashboard Kanban. L'application offre une interface sombre, intuitive et performante pour la gestion quotidienne des notes.
+
+## Fonctionnalités Principales
+
+### ✅ Fonctionnalités Implémentées
+- **Interface graphique** avec thème sombre et professionnel
+- **Gestion complète des notes** (Création, Lecture, Modification, Suppression)
+- **Recherche instantanée** dans les titres, contenu et tags
+- **Système de tags** multiples par note
+- **Épinglage de notes** pour les notes importantes
+- **Export JSON** complet avec métadonnées
+- **Lanceur bureau** pour un accès facile
+- **Persistance automatique** des données
+
+### 🔮 Fonctionnalités Promises Non Implémentées
+- Auto-sauvegarde toutes 5 minutes (configuration présente mais non implémentée)
+- Filtrage "archived" (interface présente mais fonction non opérationnelle)
+- Support Markdown (conçu comme tel)
+- Raccourcis clavier (conçu comme tel)
+
+## Instructions de Lancement
+
+### Méthode 1: Lanceur Bureau (Recommandé)
+Double-cliquez sur `HermesMultiNotesLab.bat` sur votre bureau.
+
+### Méthode 2: Lanceur Simple
+Double-cliquez sur `Lancer Hermes Notes Lab.bat` sur votre bureau.
+
+### Méthode 3: Exécution Directe
+```bash
+# Cloner le repository
+git clone https://github.com/Amoradvisory/HermesMultiNotesLab.git
+cd HermesMultiNotesLab
+
+# Installer les dépendances (si nécessaire)
+pip install -r requirements.txt
+
+# Lancer l'application
+python src/main.py
+```
+
+## Structure du Projet
 
 ```
 HermesMultiNotesLab/
 ├── src/
-│   └── main.py              # Code source principal de l'application
+│   └── main.py              # Interface graphique principale (21,990 octets)
 ├── data/
-│   └── notes.json          # Fichier de stockage des notes (format JSON)
-├── assets/
-│   └── (icônes, images)
+│   ├── notes.json          # Stockage JSON des notes
+│   ├── persistence_test.json
+│   └── test_export.json
 ├── docs/
-│   └── (documentation)
-├── dist/
-│   └── (application compilée)
+│   ├── criteres_reussite.md
+│   ├── specifications_techniques.md
+│   ├── EXPERIMENT_REPORT.md  # Rapport de l'expérience multi-instance
+│   └── WHY_IT_WORKED.md      # Analyse du succès du workflow
 ├── config.json             # Configuration de l'application
 ├── requirements.txt        # Dépendances Python
-└── README.md              # Documentation
+├── README.md              # Documentation principale
+├── SUMMARY.md              # Résumé du projet
+├── TEST_REPORT.md          # Rapport de test détaillé
+├── test_automation.py      # Script de test automatisé
+├── HermesMultiNotesLab.bat # Lanceur principal sur le bureau
+└── Lancer Hermes Notes Lab.bat # Lanceur simple
 ```
 
-### Format de stockage
+## Résumé de l'Expérience Hermes
 
-Les notes sont stockées au format JSON dans `data/notes.json`. Chaque note contient les champs suivants:
+Ce projet a été créé pour tester la capacité de Hermes à utiliser son dashboard Kanban comme centre de contrôle pour coordonner plusieurs instances spécialisées. L'expérience a démontré qu'une approche multi-instance, même simulée via `delegate_task`, peut produire des résultats supérieurs à une approche mono-instance traditionnelle.
 
-```json
-{
-  "id": "note_001",
-  "title": "Titre de la note",
-  "content": "Contenu de la note",
-  "tags": ["tag1", "tag2"],
-  "created_at": "2026-07-01T10:00:00Z",
-  "updated_at": "2026-07-01T10:00:00Z",
-  "pinned": false,
-  "archived": false
-}
-```
+### Rôles Implémentés
+- **Superviseur**: Organisation et consolidation des résultats
+- **Architecte**: Définition de l'architecture et des spécifications
+- **Développeur**: Implémentation de l'application
+- **Testeur**: Validation des fonctionnalités et identification des bugs
+- **Critique**: Analyse critique et recommandations d'amélioration
+- **Synthèse**: Regroupement final et verdict
 
-### Critères de réussite
+### Résultats Observés
+- **Note finale**: 7/10 (fonctionnel pour usage personnel)
+- **Qualité code**: Architecture propre et modulaire
+- **Interface utilisateur**: Thème sombre réussi (8/10)
+- **Fiabilité des données**: Risques identifiés (6/10)
+- **Documentation**: Complète et technique
 
-#### Fonctionnalités minimales requises:
-- ✅ Création de notes avec titre et contenu
-- ✅ Ajout de tags aux notes
-- ✅ Sauvegarde locale en JSON
-- ✅ Interface sombre, propre et lisible
-- ✅ Export des notes au format JSON
-- ✅ Lanceur simple sur le bureau
+## Liens Importants
 
-#### Fonctionnalités avancées optionnelles:
-- 🔲 Recherche plein texte
-- 🔲 Épinglage de notes
-- 🔲 Archivage de notes
-- 🔲 Support du format Markdown
-- 🔲 Raccourcis clavier
-- 🔲 Interface graphique améliorée
+- [📊 Rapport Complet de l'Expérience](docs/EXPERIMENT_REPORT.md)
+- [🎯 Prompt Utilisé pour l'Expérience](PROMPT.md)
+- [🔧 Pourquoi Ça a Marché](docs/WHY_IT_WORKED.md)
+- [📋 Rapport de Test](TEST_REPORT.md)
+- [📖 Spécifications Techniques](docs/specifications_techniques.md)
 
-## Configuration
+## Limites Connues
 
-L'application est configurée via `config.json`:
+### Critiques 🔴
+- **Pas de backup automatique réel**: Configuration présente mais non implémentée
+- **Gestion concurrente des données**: Pas de verrouillage de fichier
+- **Risque de corruption**: Si l'application est lancée plusieurs fois simultanément
 
-- **Thème**: Interface sombre
-- **Taille de police**: 14px
-- **Taille de fenêtre**: 800x600
-- **Auto-sauvegarde**: Activée
-- **Backup**: Activée toutes les 5 minutes
+### Moyennes 🟠
+- **Filtrage "archived" non fonctionnel**: Fonctionnalité déclarée mais non implémentée
+- **Notes non différenciées**: Problème d'UX avec titres identiques
+- **Gestion des erreurs insuffisante**: Trop basique pour un usage productif
 
-## Utilisation
+### Mineures 🟡
+- **Support Markdown non implémenté**: Conçu comme tel
+- **Pas de raccourcis clavier**: Conçu comme tel
+- **Pas de corbeille**: Fonctionnalité non demandée
 
-### Lancement de l'application
+## Prochaines Étapes Recommandées
 
-```bash
-python src/main.py
-```
+### Court Terme (1-2 semaines)
+1. Implémenter le vrai système de backup
+2. Corriger le filtrage "archived"
+3. Améliorer la différenciation des notes
 
-### Exemple d'utilisation
+### Moyen Terme (1-2 mois)
+1. Ajouter la validation des données
+2. Implémenter undo/redo basique
+3. Ajouter des raccourcis clavier
 
-```python
-from src.main import NoteManager
+### Long Terme (3-6 mois)
+1. Support Markdown
+2. Système de synchronisation
+3. Tests de concurrence approfondis
 
-# Initialiser le gestionnaire
-manager = NoteManager()
+---
 
-# Créer une note
-note = manager.create_note(
-    title="Ma première note",
-    content="Contenu de la note",
-    tags=["personnel", "important"]
-)
+## Experiment: Hermes Multi-Instance Kanban Workflow
 
-# Rechercher des notes
-results = manager.search_notes("important")
+Ce projet a été créé pour tester la capacité de Hermes à utiliser son dashboard Kanban comme centre de contrôle. Hermes devait se donner des ordres via son propre dashboard, créer des tâches Kanban par rôle (Superviseur, Architecte, Développeur, Testeur, Critique, Synthèse), et consolider les résultats.
 
-# Obtenir toutes les notes
-all_notes = manager.get_all_notes()
-```
+Le multi-instance réel n'a pas été entièrement confirmé - la coordination a été simulée via `delegate_task`. Malgré cette limite, le workflow a produit une application fonctionnelle et un rapport consolidé avec une note finale de 7/10.
 
-## Dépendances
+L'expérience a démontré qu'une approche structurée avec séparation des concerns et validation croisée peut produire des résultats supérieurs aux approches traditionnelles mono-instance.
 
-L'application utilise uniquement les bibliothèques standard de Python:
-- `json` - Pour le format JSON
-- `os` - Pour la gestion des fichiers
-- `datetime` - Pour les timestamps
-- `typing` - Pour les types
+---
 
-Aucune installation externe n'est requise.
-
-## Export
-
-Les notes peuvent être exportées au format JSON via la fonction `export_notes()`:
-
-```python
-export_data = manager.export_notes()
-# Sauvegarder dans un fichier
-with open("export.json", "w", encoding="utf-8") as f:
-    json.dump(export_data, f, indent=2, ensure_ascii=False)
-```
-
-## Développement
-
-### Ajouter de nouvelles fonctionnalités
-
-1. Modifier la classe `NoteManager` dans `src/main.py`
-2. Mettre à jour le `config.json` si nécessaire
-3. Tester les nouvelles fonctionnalités
-4. Documenter les changements
-
-### Bonnes pratiques
-
-- Utiliser des noms de variables clairs
-- Documenter les fonctions avec des docstrings
-- Gérer les erreurs de manière appropriée
-- Sauvegarder les données après chaque modification
+**Note**: Cette application a été créée dans le cadre d'une expérience de coordination multi-instance Hermes. Pour plus de détails sur l'expérience, voir [docs/EXPERIMENT_REPORT.md](docs/EXPERIMENT_REPORT.md).
