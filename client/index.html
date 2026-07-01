@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <title>Hermes Notes</title>
+  <link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+
+  <!-- ================= ÉCRAN DE CONNEXION ================= -->
+  <div id="login-screen" class="screen" hidden>
+    <div class="login-card">
+      <div class="login-logo">🗒️</div>
+      <h1>Hermes Notes</h1>
+      <p class="login-subtitle">Vos notes, partout, même hors ligne.</p>
+
+      <form id="login-form" autocomplete="on">
+        <label for="login-email">Email</label>
+        <input type="email" id="login-email" autocomplete="username" placeholder="vous@exemple.com" required>
+
+        <label for="login-password">Mot de passe</label>
+        <input type="password" id="login-password" autocomplete="current-password" placeholder="8 caractères minimum" required minlength="8">
+
+        <div id="login-error" class="form-error" hidden></div>
+
+        <div class="login-actions">
+          <button type="submit" id="btn-login" class="btn btn-primary">Se connecter</button>
+          <button type="button" id="btn-register" class="btn">Créer un compte</button>
+        </div>
+      </form>
+
+      <details class="server-details">
+        <summary>Serveur de synchronisation</summary>
+        <label for="login-server">Adresse du serveur</label>
+        <input type="url" id="login-server" placeholder="http://192.168.1.10:8787">
+        <button type="button" id="btn-test-server" class="btn btn-small">Tester la connexion</button>
+        <span id="server-test-result" class="server-test-result"></span>
+      </details>
+    </div>
+  </div>
+
+  <!-- ================= APPLICATION ================= -->
+  <div id="app-screen" class="screen" hidden>
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="app-logo">🗒️</span>
+        <span class="app-name">Hermes Notes</span>
+      </div>
+      <div class="topbar-search">
+        <input type="search" id="search-input" placeholder="Rechercher (titre, contenu, tags)…">
+      </div>
+      <div class="topbar-right">
+        <button id="sync-pill" class="sync-pill" title="État de synchronisation — cliquer pour le journal">
+          <span class="sync-dot"></span><span id="sync-label">hors ligne</span>
+        </button>
+        <button id="btn-user" class="btn-icon" title="Menu">☰</button>
+      </div>
+    </header>
+
+    <div class="layout">
+      <nav class="sidebar" id="sidebar">
+        <button class="nav-item active" data-view="all">📄 <span>Notes</span></button>
+        <button class="nav-item" data-view="pinned">📌 <span>Épinglées</span></button>
+        <button class="nav-item" data-view="archived">📁 <span>Archivées</span></button>
+        <button class="nav-item" data-view="trash">🗑️ <span>Corbeille</span></button>
+        <div class="sidebar-section" id="tags-section">
+          <div class="sidebar-title">Tags</div>
+          <div id="tags-list" class="tags-list"></div>
+        </div>
+      </nav>
+
+      <main class="content">
+        <div class="content-header">
+          <h2 id="view-title">Notes</h2>
+          <div class="content-tools">
+            <select id="sort-select" title="Trier">
+              <option value="updated">Modifiées récemment</option>
+              <option value="created">Créées récemment</option>
+              <option value="title">Titre A→Z</option>
+            </select>
+            <button id="btn-empty-trash" class="btn btn-danger btn-small" hidden>Vider la corbeille</button>
+          </div>
+        </div>
+        <div id="active-tag-banner" class="active-tag-banner" hidden></div>
+        <div id="notes-grid" class="notes-grid"></div>
+        <div id="empty-state" class="empty-state" hidden>
+          <div class="empty-icon">✨</div>
+          <p id="empty-text">Aucune note pour l'instant. Créez votre première note !</p>
+        </div>
+      </main>
+    </div>
+
+    <button id="btn-new-note" class="fab" title="Nouvelle note">＋</button>
+
+    <footer class="footer">
+      <span id="positive-message" class="positive-message"></span>
+    </footer>
+  </div>
+
+  <!-- ================= ÉDITEUR ================= -->
+  <div id="editor-overlay" class="overlay" hidden>
+    <div class="editor">
+      <div class="editor-bar">
+        <button id="btn-editor-back" class="btn-icon" title="Fermer">←</button>
+        <div class="editor-bar-actions">
+          <button id="btn-editor-pin" class="btn-icon" title="Épingler">📌</button>
+          <button id="btn-editor-archive" class="btn-icon" title="Archiver">📁</button>
+          <button id="btn-editor-trash" class="btn-icon" title="Mettre à la corbeille">🗑️</button>
+          <button id="btn-editor-restore" class="btn btn-small" hidden>Restaurer</button>
+          <button id="btn-editor-purge" class="btn btn-danger btn-small" hidden>Supprimer définitivement</button>
+        </div>
+      </div>
+      <input type="text" id="editor-title" class="editor-title" placeholder="Titre">
+      <textarea id="editor-content" class="editor-content" placeholder="Écrivez votre note ici…"></textarea>
+      <input type="text" id="editor-tags" class="editor-tags" placeholder="Tags séparés par des virgules (ex: travail, idées)">
+      <div class="editor-meta" id="editor-meta"></div>
+    </div>
+  </div>
+
+  <!-- ================= MENU UTILISATEUR / RÉGLAGES ================= -->
+  <div id="menu-overlay" class="overlay" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Menu</h3>
+        <button class="btn-icon modal-close" data-close="menu-overlay">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="menu-user">
+          <div class="menu-user-avatar">👤</div>
+          <div>
+            <div id="menu-email" class="menu-email">—</div>
+            <div id="menu-server" class="menu-server">—</div>
+          </div>
+        </div>
+        <div class="menu-actions">
+          <button id="btn-sync-now" class="btn">🔄 Synchroniser maintenant</button>
+          <button id="btn-journal" class="btn">📜 Journal de synchronisation</button>
+          <button id="btn-export-json" class="btn">⬇️ Exporter (JSON)</button>
+          <button id="btn-export-md" class="btn">⬇️ Exporter (Markdown)</button>
+          <button id="btn-import-json" class="btn">⬆️ Importer (JSON)</button>
+          <input type="file" id="import-file" accept=".json,application/json" hidden>
+          <button id="btn-backups" class="btn">🛟 Sauvegardes locales</button>
+          <button id="btn-settings" class="btn">⚙️ Réglages serveur</button>
+          <button id="btn-logout" class="btn btn-danger">Se déconnecter</button>
+        </div>
+        <div class="menu-footer">Hermes Notes V2 · <span id="menu-version"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= JOURNAL DE SYNC ================= -->
+  <div id="journal-overlay" class="overlay" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Journal de synchronisation</h3>
+        <button class="btn-icon modal-close" data-close="journal-overlay">✕</button>
+      </div>
+      <div class="modal-body">
+        <div id="journal-list" class="journal-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= SAUVEGARDES ================= -->
+  <div id="backups-overlay" class="overlay" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Sauvegardes locales</h3>
+        <button class="btn-icon modal-close" data-close="backups-overlay">✕</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-hint">Instantanés automatiques conservés sur cet appareil (10 max). La restauration ré-ajoute les notes manquantes sans écraser les plus récentes.</p>
+        <button id="btn-backup-now" class="btn">Créer une sauvegarde maintenant</button>
+        <div id="backups-list" class="journal-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ================= RÉGLAGES SERVEUR ================= -->
+  <div id="settings-overlay" class="overlay" hidden>
+    <div class="modal">
+      <div class="modal-header">
+        <h3>Réglages serveur</h3>
+        <button class="btn-icon modal-close" data-close="settings-overlay">✕</button>
+      </div>
+      <div class="modal-body">
+        <label for="settings-server">Adresse du serveur de synchronisation</label>
+        <input type="url" id="settings-server" placeholder="http://192.168.1.10:8787">
+        <button id="btn-settings-test" class="btn btn-small">Tester</button>
+        <span id="settings-test-result" class="server-test-result"></span>
+        <button id="btn-settings-save" class="btn btn-primary">Enregistrer</button>
+        <p class="modal-hint">La synchronisation est automatique : au démarrage, après chaque changement, toutes les 60 secondes et au retour de la connexion.</p>
+      </div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" hidden></div>
+
+  <script src="js/db.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/sync.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

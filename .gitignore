@@ -1,0 +1,34 @@
+# Dépendances
+node_modules/
+
+# Builds et artefacts
+desktop/www/
+desktop/dist/
+mobile/www/
+mobile/android/
+dist/
+build/
+*.apk
+*.aab
+*.exe
+
+# Données locales du serveur (base, secret JWT, backups)
+server/data/
+
+# Secrets — ne jamais commiter
+.env
+.env.*
+*.keystore
+*.jks
+*.pem
+*.key
+keystore.properties
+
+# Python (prototype V1)
+__pycache__/
+*.pyc
+
+# Divers
+Thumbs.db
+.DS_Store
+*.log

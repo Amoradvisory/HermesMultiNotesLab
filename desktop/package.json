@@ -1,0 +1,37 @@
+{
+  "name": "hermes-notes-desktop",
+  "version": "2.0.0",
+  "description": "Hermes Notes V2 — application Windows (Electron)",
+  "main": "main.js",
+  "author": "Amor / Hermes",
+  "license": "MIT",
+  "scripts": {
+    "sync-www": "node ../scripts/copy-www.mjs desktop",
+    "start": "npm run sync-www && electron .",
+    "build": "npm run sync-www && electron-builder --win portable"
+  },
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "be.hermes.notes",
+    "productName": "Hermes Notes",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "www/**/*"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ],
+      "signAndEditExecutable": false
+    },
+    "portable": {
+      "artifactName": "HermesNotes-${version}-portable.exe"
+    }
+  }
+}

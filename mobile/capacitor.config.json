@@ -1,0 +1,12 @@
+{
+  "appId": "be.hermes.notes",
+  "appName": "Hermes Notes",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https",
+    "cleartext": true
+  },
+  "android": {
+    "allowMixedContent": true
+  }
+}

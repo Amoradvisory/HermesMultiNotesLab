@@ -1,0 +1,18 @@
+{
+  "name": "hermes-notes-mobile",
+  "version": "2.0.0",
+  "description": "Hermes Notes V2 — application Android (Capacitor)",
+  "author": "Amor / Hermes",
+  "license": "MIT",
+  "scripts": {
+    "sync-www": "node ../scripts/copy-www.mjs mobile",
+    "build:apk": "npm run sync-www && npx cap sync android && cd android && gradlew.bat assembleDebug"
+  },
+  "dependencies": {
+    "@capacitor/android": "^6.2.0",
+    "@capacitor/core": "^6.2.0"
+  },
+  "devDependencies": {
+    "@capacitor/cli": "^6.2.0"
+  }
+}
