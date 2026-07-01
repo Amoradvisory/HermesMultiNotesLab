@@ -1,0 +1,106 @@
+[
+  {
+    "id": "note_001",
+    "title": "Note d'exemple",
+    "content": "Ceci est une note d'exemple pour démontrer la structure de données.",
+    "tags": [
+      "exemple",
+      "demo"
+    ],
+    "created_at": "2026-07-01T10:00:00Z",
+    "updated_at": "2026-07-01T10:00:00Z",
+    "pinned": false,
+    "archived": false
+  },
+  {
+    "id": "note_002",
+    "title": "Idées pour l'application",
+    "content": "Ajouter la recherche plein texte\nSupporter le format markdown\nAjouter des raccourcis clavier",
+    "tags": [
+      "développement",
+      "todo"
+    ],
+    "created_at": "2026-07-01T11:30:00Z",
+    "updated_at": "2026-07-01T11:30:00Z",
+    "pinned": true,
+    "archived": false
+  },
+  {
+    "id": "note_003",
+    "title": "Première note",
+    "content": "Ceci est ma première note dans Hermes Multi Notes Lab!",
+    "tags": [
+      "premiere",
+      "demo"
+    ],
+    "created_at": "2026-07-01T19:24:40.950821",
+    "updated_at": "2026-07-01T19:24:40.950821",
+    "pinned": false,
+    "archived": false
+  },
+  {
+    "id": "note_004",
+    "title": "Première note",
+    "content": "Ceci est ma première note dans Hermes Multi Notes Lab!",
+    "tags": [
+      "premiere",
+      "demo"
+    ],
+    "created_at": "2026-07-01T19:28:23.034964",
+    "updated_at": "2026-07-01T19:28:23.034964",
+    "pinned": false,
+    "archived": false
+  },
+  {
+    "id": "note_005",
+    "title": "Note Test Modifiée",
+    "content": "Contenu modifié pour le test.",
+    "tags": [
+      "test",
+      "verification"
+    ],
+    "created_at": "2026-07-01T19:30:51.246993",
+    "updated_at": "2026-07-01T19:30:51.248997",
+    "pinned": false,
+    "archived": false
+  },
+  {
+    "id": "note_006",
+    "title": "Note Importante",
+    "content": "Cette note doit être trouvée par la recherche.",
+    "tags": [
+      "important",
+      "test"
+    ],
+    "created_at": "2026-07-01T19:30:51.247993",
+    "updated_at": "2026-07-01T19:30:51.250996",
+    "pinned": true,
+    "archived": false
+  },
+  {
+    "id": "note_007",
+    "title": "Test de Persistance (Modifié)",
+    "content": "Contenu modifié pour le test",
+    "tags": [
+      "test",
+      "persistance"
+    ],
+    "created_at": "2026-07-01T19:34:41.699736",
+    "updated_at": "2026-07-01T19:34:41.701737",
+    "pinned": false,
+    "archived": false
+  },
+  {
+    "id": "note_008",
+    "title": "Test de Persistance 2",
+    "content": "Contenu de la deuxième note de test",
+    "tags": [
+      "test",
+      "validation"
+    ],
+    "created_at": "2026-07-01T19:34:41.700737",
+    "updated_at": "2026-07-01T19:34:41.702738",
+    "pinned": true,
+    "archived": false
+  }
+]

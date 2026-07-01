@@ -1,0 +1,35 @@
+{
+  "app": {
+    "name": "Hermes Multi Notes Lab",
+    "version": "1.0.0",
+    "description": "Application locale de prise de notes simple et fonctionnelle",
+    "author": "Hermes Team",
+    "theme": "dark"
+  },
+  "storage": {
+    "format": "json",
+    "notes_file": "data/notes.json",
+    "backup_enabled": true,
+    "backup_interval": 300
+  },
+  "ui": {
+    "theme": "dark",
+    "font_size": 14,
+    "font_family": "Arial, sans-serif",
+    "window_width": 800,
+    "window_height": 600,
+    "max_recent_notes": 10
+  },
+  "features": {
+    "tags_enabled": true,
+    "search_enabled": true,
+    "export_enabled": true,
+    "auto_save": true,
+    "markdown_support": false
+  },
+  "export": {
+    "formats": ["json"],
+    "include_metadata": true,
+    "include_tags": true
+  }
+}

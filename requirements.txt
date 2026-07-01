@@ -1,0 +1,23 @@
+# Hermes Multi Notes Lab - Dépendances Python
+# Version 1.0.0
+
+# Dépendances principales
+# tkinter est inclus avec Python standard
+# json est inclus avec Python standard
+# os est inclus avec Python standard
+# sys est inclus avec Python standard
+# datetime est inclus avec Python standard
+# typing est inclus avec Python standard
+
+# Aucune dépendance externe requise pour la version de base
+# L'application utilise uniquement les bibliothèques standard de Python
+
+# Dépendances optionnelles pour futures extensions:
+# PyQt5>=5.15.0  # Pour une interface graphique plus avancée
+# tkinterhtml>=1.0  # Pour le support HTML dans tkinter
+# pillow>=9.0.0  # Pour la gestion d'images
+
+# Dépendances pour le développement:
+# pytest>=7.0.0  # Pour les tests unitaires
+# black>=22.0.0  # Pour le formatage du code
+# flake8>=4.0.0  # Pour le linting du code
